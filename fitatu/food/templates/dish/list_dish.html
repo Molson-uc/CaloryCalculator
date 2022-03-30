@@ -1,0 +1,12 @@
+<h1>Dishes</h1>
+{% if dishes_list%}
+    {% for dish in dishes_list %}
+    <p> {{dish.name}}</p> <a href="{% url "detail-dish" dish.id %}">update</a>
+    <a href="{% url "calories" dish.id %}">calories</a>
+    {% endfor %}
+
+{% else %}
+    <p> no dishes </p>
+{% endif %}
+
+    <a href="{% url "dish_add" %}">add dish</a>

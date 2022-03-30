@@ -1,0 +1,12 @@
+<h1>Calories</h1>
+
+{{model.name}}
+<p>Please enter dish weight:</p>
+<form method="post" action="">
+    {% csrf_token %}
+    {{form.portion}}
+    <input type="submit" value="Calculate">
+</form>
+
+<p>Actual calorific value is:</p>
+{{model.actual_calories}}
