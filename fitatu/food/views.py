@@ -37,12 +37,16 @@ class UpdateDish(UpdateView):
 
 def CalculateDishCalories(request, _pk):
     dish = get_object_or_404(Dish, pk=_pk)
-    form = DishForm(instance=dish)
+    form = DishForm()
+    calories = 0
 
     if request.method == "POST":
         form = DishForm(request.POST, instance=dish)
+
         # value = dish["calories"] * form["portion"]
-        form.save()
-        print("Calories:", dish.actual_calories)
-        return render(request, "dish/calories.html", {"form": form, "model": dish})
-    return render(request, "dish/calories.html", {"form": form, "model": dish})
+        if form.is_valid():
+            calories = form.cleaned_data.get("portion") * dish.calories_in_100g
+
+    return render(
+        request, "dish/calories.html", {"form": form, "model": dish, "calories": calories}
+    )

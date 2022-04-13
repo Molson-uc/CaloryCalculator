@@ -12,10 +12,4 @@ class Dish(models.Model):
     def get_absolute_url(self):
         return reverse("detail-dish", kwargs={"pk": self.pk})
 
-    @property
-    def actual_calories(self):
-        ac_calories = self.portion * self.calories_in_100g
-        if ac_calories > 0:
-            return ac_calories
-        else:
-            return "wrong value"
+
